@@ -20,4 +20,10 @@ public class SolutionTest {
 		var solution = new Solution();
 		assertEquals("nn", solution.longestPalindrome("finn"));
 	}
+
+	@Test
+	void Example4() {
+		var solution = new Solution();
+		assertEquals("a", solution.longestPalindrome("ac"));
+	}
 }

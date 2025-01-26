@@ -1,59 +1,64 @@
 class Solution {
-	public boolean isPalindrome(String s) {
-		// Initialise the max pointer
-		int max = s.length() -1;
-		float mid = max / 2.0f;
-
-		// Run until offset is more than half way through the string
-		for (int offset = 0; offset < mid; offset++) {
-			// If chars at each end of string do not match
-			if (s.charAt(offset) != s.charAt(max - offset)) return false;
-		}
-
-		return true;
-	}
-	
-
 	public String longestPalindrome(String s) {
+		// Get length of string
+		int len = s.length();
+
+		// Return empty string if provided empty string
+		// Return single char if provided single char
+		if (len <= 1) return s;
+
+
 		// Initialise the max pointer
-		int max = s.length() -1;
+		int max = len -1;
 
 		// Initialise the longest palindrome
-		String longest = "";
-		int longestLen = 0;
+		String longest = null;
+		int longestLen = 1;
 
 
 		/*
-			Only continue if there are enough chars left to create a longer 
-			palindrome.
+			Iterate through length of string.
+
+			Start at 1 and end at max because we already know the longest 
+			palindrome is at least 1 char.
 		*/
-		for (
-			int start = 0;
-			(max - start) >= longestLen;
-			start++
-		) {
-			/*
-				Start the end pointer at the position where the sub string is
-				larger then the current longest palindrome.
+		for (int mid = 1; (mid <= max); mid++) {
+			// End when it is not possible to find a longer palindrome
+			if ((len - mid) < (longestLen / 2.0f)) break;
 
-				Then continue until end of string.
-			*/
-			for (
-				int end = start +1 + longestLen;
-				end <= max +1;
-				end++
-			) {
-				// Get substring
-				String subS = s.substring(start, end);
-				int subSLen = subS.length();
-
-				// If the substring is bigger and is a palindrome
-				if (subSLen > longestLen && isPalindrome(subS)) {
-					longest = subS;
-					longestLen = subSLen;
+			// even
+			int l = mid -1;
+			int r = mid;
+			while (l >= 0 && r <= max && s.charAt(l) == s.charAt(r)) {
+				int subLen = r - l + 1;
+				if (subLen > longestLen) {
+					longest = s.substring(l, r +1);
+					longestLen = subLen;
 				}
+				l--;
+				r++;
+			}
+
+
+			// End when it is not possible to find a longer palindrome
+			if ((len - mid) < (longestLen / 2.0f)) break;
+
+			// odd
+			l = mid -1;
+			r = mid +1;
+			while (l >= 0 && r <= max && s.charAt(l) == s.charAt(r)) {
+				int subLen = r - l + 1;
+				if (subLen > longestLen) {
+					longest = s.substring(l, r +1);
+					longestLen = subLen;
+				}
+				l--;
+				r++;
 			}
 		}
+
+		// If no palindrome longer than 1 found, set longest to first char
+		if (longest == null) longest = s.substring(0, 1);
 
 		return longest;
 	}
