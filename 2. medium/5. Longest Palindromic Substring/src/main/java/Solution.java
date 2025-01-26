@@ -23,15 +23,23 @@ class Solution {
 		int longestLen = 0;
 
 
-		// Only run if there are enough chars left to create a longer palindrome
+		/*
+			Only continue if there are enough chars left to create a longer 
+			palindrome.
+		*/
 		for (
 			int start = 0;
 			(max - start) >= longestLen;
 			start++
 		) {
-			// Run until the end of the string is reached
+			/*
+				Start the end pointer at the position where the sub string is
+				larger then the current longest palindrome.
+
+				Then continue until end of string.
+			*/
 			for (
-				int end = start +1;
+				int end = start +1 + longestLen;
 				end <= max +1;
 				end++
 			) {
