@@ -7,41 +7,52 @@ class Solution {
 		// Get length of string to convert
 		int sLen = s.length();
 
-		// Initialise a char array to store converted string
-		char[] converted = new char[sLen];
-
-
-		// The difference in the pointers at the peaks of the zigzag
+		// The index difference of chars at the peaks of the zigzag
 		int peakDif = (numRows -1) * 2;
 
-		// The number of peaks in the zigzag
-		int numPeaks = sLen / peakDif;
-		if (sLen % peakDif > 0) numPeaks++;
 
-		// The difference in pointers between the peak and trough of the zigzag
-		int endRowOffset = numRows - 1;
+		// Initialise a char array to store converted string
+		char[] converted = new char[sLen];
+		
+		// Next index to add char into
+		int convertedIndex = 0;
 
 
 		/*
-			Add the chars that will be at the peaks and troughs of the zigzag.
-			These are the chars that appear in the first and last rows.
-			Which converts into the start and end of the new string.
+			Iterate through string row by row.
+			The original index of the 1st char in the 1st row will be 0,
+			The original index of the 1st char in the 2nd row will be 1,
+			The original index of the 1st char in the 3rd row will be 2,
+			etc.
 		*/
-		int troughsAdded = 0;
-		for (int i = 0; i < numPeaks; i++) {
-			// Start
-			int startCharIndex = i * peakDif;
-			converted[i] = s.charAt((startCharIndex));
+		for (int i = 0; i < numRows; i++) {
+			int sIndex = i;
+			while (sIndex < sLen) {
+				// Add the char at the current row and column
+				converted[convertedIndex] = s.charAt(sIndex);
+				convertedIndex++;
 
-			// End
-			int endCharIndex = 
-				 ((numPeaks -1) * peakDif) // Get to the end of the first row
-				+(endRowOffset)			   // Get to the end of the last row
-				-(i * peakDif);			   // Move left i times
-			
-			if (endCharIndex >= sLen) continue;
-			converted[sLen - 1 - troughsAdded] = s.charAt(endCharIndex);
-			troughsAdded++;
+				// If not the first or last row
+				if (i != 0 && i != numRows -1) {
+					// For middle rows
+
+					/*
+						Get the index of the extra char that appears before 
+						the next column.
+					*/
+					int extraCharIndex = sIndex + peakDif - (2 * i);
+
+					// If index exceeds length of string, break out of while loop
+					if (extraCharIndex >= sLen) break;
+
+					// Add the extra char
+					converted[convertedIndex] = s.charAt(extraCharIndex);
+					convertedIndex++;
+				}
+
+				// Go to the next column
+				sIndex+= peakDif;
+			}
 		}
 
 
