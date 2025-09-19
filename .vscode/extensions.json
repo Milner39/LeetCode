@@ -1,6 +1,7 @@
 {
   "recommendations": [
     "vscjava.vscode-gradle",
-    "bbenoist.nix"
+    "bbenoist.nix",
+    "mathiasfrohlich.kotlin"
   ]
 }
