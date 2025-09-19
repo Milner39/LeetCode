@@ -15,10 +15,10 @@ subprojects {
 
   dependencies {
     // Testing
-    testImplementation("org.junit.jupiter:junit-jupiter:5.10.0")
+    "testImplementation"("org.junit.jupiter:junit-jupiter:5.10.0")
   }
 
-  tasks.test {
+  tasks.withType<Test> {
     // Use JUnit for testing
     useJUnitPlatform()
   }

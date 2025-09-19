@@ -23,7 +23,7 @@ file(solDir).listFiles()
         // Include as sub-project and set location
         include(projectPath)
         project(projectPath)
-          .projectDir = file(path)
+          .projectDir = file(dirPath)
 
       }
   }
