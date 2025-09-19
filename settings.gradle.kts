@@ -27,3 +27,5 @@ file(solDir).listFiles()
 
       }
   }
+
+// NOTE: There cannot be spaces in the project paths, so avoid spaces in dir names
