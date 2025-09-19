@@ -3,12 +3,12 @@
 		"abcabcbb",
 		"babad",
 		"cbbd",
+		"numtide",
 		"PAHNAPLSIIGYIR",
 		"PAYPALISHIRING",
 		"PINALSIGYAHRPI",
 		"pwwkew",
-		"PYAIHRNAPLSIIG"
+		"PYAIHRNAPLSIIG",
+		"nixpkgs"
 	],
-	"java.configuration.updateBuildConfiguration": "automatic",
-	"maven.view": "flat"
 }
