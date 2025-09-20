@@ -2,6 +2,6 @@
   "recommendations": [
     "vscjava.vscode-gradle",
     "bbenoist.nix",
-    "mathiasfrohlich.kotlin"
+    "redhat.java",
   ]
 }
