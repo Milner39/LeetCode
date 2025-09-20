@@ -23,14 +23,18 @@ class Solution {
     // Stop when only 1 or 2 numbers are left
     while (((p1R - p1L +1) + (p2R - p2L +1)) > 2) {
       // Get rid of smallest number
-      if (nums1[p1L] < nums2[p2L]) {
+      if (p1L == nums1.length) p2L++;
+      else if (p2L == nums2.length) p1L++; 
+      else if (nums1[p1L] < nums2[p2L]) {
         p1L++;
       } else {
         p2L++;
       }
 
       // Get rid of largest number
-      if (nums1[p1R] > nums2[p2R]) {
+      if (p1R == -1) p2R--;
+      else if (p2R == -1) p2L--; 
+      else if (nums1[p1R] > nums2[p2R]) {
         p1R--;
       } else {
         p2R--;
@@ -39,12 +43,18 @@ class Solution {
 
 
     // Get final numbers
-    if (p2L > p2R) {                // Last numbers in nums1
-      return (p1L + p1R) / 2;
+
+    // Both in nums1
+    if (p2L > p2R) {
+      return (double) (nums1[p1L] + nums1[p1R]) / 2;
     }
+
+    // Both in nums2
     else if (p1L > p1R) {
-      return (p2L + p2R) / 2;       // Last numbers in nums2
+      return (double) (nums2[p2L] + nums2[p2R]) / 2;
     }
-    else return (p1L + p2L) / 2;    // Last numbers
+
+    // One in each
+    else return (double) (nums1[p1L] + nums2[p2L]) / 2;
   }
 }
