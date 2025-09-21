@@ -1,60 +1,72 @@
 class Solution {
-  /*
-    Merging the sorted arrays would be too slow, so straight away I know I'll
-    be doing some sort of comparison between elements in each array.
-
-    When finding the median, usually you'd get rid of the smallest number, then
-    get of the largest number, and repeat until you had 1 or 2 numbers left.
-    So I want to be looking at the smallest and largest number in the arrays.
-
-    I need to keep in mind that the array containing the smallest number, or 
-    the biggest number, won't stay the same each iteration.
-  */
   public double findMedianSortedArrays(int[] nums1, int[] nums2) {
 
-    // Set pointers to compare the smallest and largest numbers in each array
-    var p1L = 0;
-    var p1R = nums1.length -1;
+    /* Make nums1 the smallest array
+      Picking the smallest array to do binary search on makes our time 
+      complexity `O(log(min(n, m)))`.
+    */
+    if (nums1.length > nums2.length) {
+      var tmp = nums1;
+      nums1 = nums2;
+      nums2 = tmp;
+    }
 
-    var p2L = 0;
-    var p2R = nums2.length -1;
+
+    // Calculate helpful variables
+    int     total = nums1.length + nums2.length;
+    int     half  = total / 2;
+    boolean isOdd = (total % 2 == 1);
 
 
-    // Stop when only 1 or 2 numbers are left
-    while (((p1R - p1L +1) + (p2R - p2L +1)) > 2) {
-      // Get rid of smallest number
-      if (p1L == nums1.length) p2L++;
-      else if (p2L == nums2.length) p1L++; 
-      else if (nums1[p1L] < nums2[p2L]) {
-        p1L++;
-      } else {
-        p2L++;
+    // Set pointers to either end of nums1 for binary search
+    int left = 0;
+    int right = nums1.length -1;
+
+    // Binary search
+    while (true) {
+      // Get middle pointer of nums1
+      int m1 = (left + right) / 2;
+
+      /* Get middle pointer of nums2
+        To calculate this position, we know that half of the numbers should be 
+        in the "low" group and half should be in the "high" group.
+
+        All the numbers in nums1 from 0 to m1 will be in our low group, so we 
+        can calculate how many numbers are left to be included in the low group.
+
+        This will be shown by this pointer for nums2.
+      */ 
+      int m2 = half - m1 -2;
+
+
+      // Get the values of each number at the border of the "low-high" groups
+      int low1  = (m1 >= 0)             ? nums1[m1]   : Integer.MIN_VALUE;
+      int high1 = (m1+1 < nums1.length) ? nums1[m1+1] : Integer.MAX_VALUE;
+      int low2  = (m2 >= 0)             ? nums2[m2]   : Integer.MIN_VALUE;
+      int high2 = (m2+1 < nums2.length) ? nums2[m2+1] : Integer.MAX_VALUE;
+
+
+      // If our groups are correct
+      if (low1 <= high2 && low2 <= high1) {
+        // Odd
+        if (isOdd) {
+          return Math.min(high1, high2);
+        }
+
+        // Even
+        return (double) (Math.max(low1, low2) + Math.min(high1, high2)) / 2;
       }
 
-      // Get rid of largest number
-      if (p1R == -1) p2R--;
-      else if (p2R == -1) p2L--; 
-      else if (nums1[p1R] > nums2[p2R]) {
-        p1R--;
-      } else {
-        p2R--;
+
+      // nums1 low group too big
+      else if (low1 > high2) {
+        right = m1 -1;
+      }
+
+      // nums1 low group too small
+      else {
+        left = m1 +1;
       }
     }
-
-
-    // Get final numbers
-
-    // Both in nums1
-    if (p2L > p2R) {
-      return (double) (nums1[p1L] + nums1[p1R]) / 2;
-    }
-
-    // Both in nums2
-    else if (p1L > p1R) {
-      return (double) (nums2[p2L] + nums2[p2R]) / 2;
-    }
-
-    // One in each
-    else return (double) (nums1[p1L] + nums2[p2L]) / 2;
   }
 }
