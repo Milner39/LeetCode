@@ -65,3 +65,8 @@ subprojects {
     }
   }
 }
+
+// Store all project `build` dirs under the root `build` dir
+allprojects {
+  buildDir = File(rootProject.buildDir, project.name)
+}

@@ -8,22 +8,20 @@ var solDir = "solutions"
 
 // Look in `./solutions/`
 file(solDir).listFiles()
-  ?.filter { it.isDirectory }
+  ?.filter { it.isDirectory && !it.name.equals("build") }
   ?.forEach { difficultyDir ->
 
     // Look in `./solutions/{diff}/`
     difficultyDir.listFiles()
-      ?.filter { it.isDirectory }
+      ?.filter { it.isDirectory  && !it.name.equals("build") }
       ?.forEach { problemDir ->
 
         // Get relative path to each problem dir
         val dirPath = "${solDir}/${difficultyDir.name}/${problemDir.name}"
-        var projectPath = "/${dirPath}".replace("/", ":")
 
         // Include each as sub-project and set location
-        include(projectPath)
-        project(projectPath)
-          .projectDir = file(dirPath)
+        include(problemDir.name)
+        project(":${problemDir.name}").projectDir = file(dirPath)
 
       }
   }
