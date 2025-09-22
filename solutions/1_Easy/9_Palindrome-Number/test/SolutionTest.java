@@ -6,18 +6,27 @@ public class SolutionTest {
 	@Test
 	void Example1() {
 		var solution = new Solution();
-		assertEquals(true, solution.isPalindrome(121));
+		assertEquals(
+			true,
+			solution.isPalindrome(121)
+		);
 	}
 
 	@Test
 	void Example2() {
 		var solution = new Solution();
-		assertEquals(false, solution.isPalindrome(-121));
+		assertEquals(
+			false,
+			solution.isPalindrome(-121)
+		);
 	}
 
 	@Test
 	void Example3() {
 		var solution = new Solution();
-		assertEquals(false, solution.isPalindrome(10));
+		assertEquals(
+			false,
+			solution.isPalindrome(10)
+		);
 	}
 }
