@@ -20,7 +20,7 @@ file(solDir).listFiles()
         val dirPath = "${solDir}/${difficultyDir.name}/${problemDir.name}"
         var projectPath = "/${dirPath}".replace("/", ":")
 
-        // Include as sub-project and set location
+        // Include each as sub-project and set location
         include(projectPath)
         project(projectPath)
           .projectDir = file(dirPath)
