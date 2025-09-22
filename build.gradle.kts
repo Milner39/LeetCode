@@ -92,7 +92,6 @@ subprojects {
 
   // === Testing ===
 
-  // ✅ Configure test task
   tasks.withType<Test> {
     useJUnitPlatform()
   }
