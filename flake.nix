@@ -9,6 +9,8 @@
       let pkgs = import nixpkgs { inherit system; config.allowUnfree = true; };
       in {
         devShells.default = pkgs.mkShell {
+          # `nix develop` to enter this dev-shell
+          # If you don't use nix, you can ignore this file
 
           packages = with pkgs; [
             jdk21
