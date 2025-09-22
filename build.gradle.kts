@@ -11,7 +11,7 @@ subprojects {
 
 
 
-  // === Extensions ===
+  // === Java ===
 
   // Use specific Java version
   extensions.configure<JavaPluginExtension> {
@@ -20,7 +20,20 @@ subprojects {
     }
   }
 
-  // === Extensions ===
+  configure<SourceSetContainer> {
+    named("main") {
+      // Gradle will look for main code in:
+      // `./src` instead of `./src/main/java`
+      java.srcDirs("src")
+    }
+    named("test") {
+      // Gradle will look for test code in:
+      // `./test` instead of `./src/test/java`
+      java.srcDirs("test")
+    }
+  }
+
+  // === Java ===
 
 
 
@@ -49,22 +62,9 @@ subprojects {
   }
 
   // === Testing ===
-
-
-
-  configure<SourceSetContainer> {
-    named("main") {
-      // Gradle will look for main code in:
-      // `./src` instead of `./src/main/java`
-      java.srcDirs("src")
-    }
-    named("test") {
-      // Gradle will look for test code in:
-      // `./test` instead of `./src/test/java`
-      java.srcDirs("test")
-    }
-  }
 }
+
+
 
 // Store all project `build` dirs under the root `build` dir
 allprojects {
