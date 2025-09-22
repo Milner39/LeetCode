@@ -1,3 +1,8 @@
+plugins {
+  // Declare the application plugin (Gradle’s built-in plugin)
+  id("application")
+}
+
 subprojects {
   // === Plugins ===
 
@@ -31,6 +36,11 @@ subprojects {
       // `./test` instead of `./src/test/java`
       java.srcDirs("test")
     }
+  }
+
+  // Set the entry point to all projects
+  application {
+    mainClass.set("Solution")
   }
 
   // === Java ===
@@ -68,5 +78,6 @@ subprojects {
 
 // Store all project `build` dirs under the root `build` dir
 allprojects {
-  buildDir = File(rootProject.buildDir, project.name)
+  val relPath = project.path.removePrefix(":").replace(":", "/")
+  buildDir = File(rootProject.buildDir, relPath)
 }
