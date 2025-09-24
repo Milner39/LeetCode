@@ -1,5 +1,8 @@
 plugins {
-  // Declare the application plugin (Gradle’s built-in plugin)
+  // Declare the java plugin (Stops the Java LS extension from freaking out)
+  id("java")
+
+  // Declare the application plugin (Stops Gradle from freaking out)
   id("application")
 }
 
