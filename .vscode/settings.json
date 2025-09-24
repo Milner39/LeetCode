@@ -16,5 +16,6 @@
     "PYAIHRNAPLSIIG",
     "strs"
   ],
-  "java.configuration.updateBuildConfiguration": "automatic",
+  "java.configuration.updateBuildConfiguration": "interactive",
+  "java.import.projectSelection": "manual"
 }
