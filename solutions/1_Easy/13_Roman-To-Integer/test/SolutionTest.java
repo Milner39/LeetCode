@@ -17,7 +17,7 @@ public class SolutionTest {
     var solution = new Solution();
     assertEquals(
       58,
-      solution.isPalindrome("LVIII")
+      solution.romanToInt("LVIII")
     );
   }
 
@@ -26,7 +26,7 @@ public class SolutionTest {
     var solution = new Solution();
     assertEquals(
       1994,
-      solution.isPalindrome("MCMXCIV")
+      solution.romanToInt("MCMXCIV")
     );
   }
 }
