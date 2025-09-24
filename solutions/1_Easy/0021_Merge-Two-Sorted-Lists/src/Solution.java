@@ -1,5 +1,3 @@
-import java.util.Arrays;
-
 class Solution {
   public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
     // Return fast if either empty
