@@ -1,0 +1,46 @@
+# LeetCode
+
+A collection of LeetCode solutions, written by me.
+
+
+## How to Run
+
+### Nix users
+...can optionally run:
+```bash
+nix develop
+```
+In the root directory, to install any required packages.
+
+
+### VSCode users
+...can optionally install the suggested extensions.
+
+The Java language server extension is buggy, you must import the gradle Java 
+build files manually, and when prompted to, choose `Let Me Select...` when the 
+popup appears.
+
+If the popup does not appear, run `java.clean.workspace` in your command pallet.
+
+
+### Everyone
+...can run:
+```bash
+./gradlew projects
+```
+To view every currently available solution.
+
+<br/>
+
+```bash
+./gradlew :<project-name>:test
+```
+To run the tests in `<project-name>/test`.
+
+<br/>
+
+```bash
+./gradlew :<project-name>:run
+```
+To run the `public static void main(String[] args)` method in 
+`<project-name>/src/Solution.java` if one is present (that's up to you).
